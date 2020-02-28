@@ -3,15 +3,9 @@
 # To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 
 layout: home
-search: exclude
 ---
+Este blog - [chekos.dev](https://chekos.dev/) - existe como repositorio de ideas y experimentos mios que no caben en la filosofía de **tacosdedatos**. Para más todo eso existen [el sitio web](https://tacosdedatos.com/), [el podcast **tacosdedatos, el podcast**](https://anchor.fm/tacosdedatos), [el podcast **Quail data**](https://anchor.fm/quaildata) (y su sitio [tacosdedatos.fm](https://tacosdedatos.fm)), [el boletín](https://tacosdedatos.substack.com/), [el canal de youtube](https://youtube.com/tacosdedatos) y hasta ["la academia"](https://tacosdedatos.academy/). 
 
-This site is built with [fastpages](https://github.com/fastai/fastpages), An easy to use blogging platform with extra features for Jupyter Notebooks.
+Para todo lo demás - [chekos.dev](https://chekos.dev/)
 
-![](images/diagram.png "https://github.com/fastai/fastpages")
-
-[fastpages](https://github.com/fastai/fastpages) automates the process of creating blog posts via GitHub Actions, so you don't have to fuss with conversion scripts.  A full list of features can be found on [GitHub](https://github.com/fastai/fastpages).  
-
-You can edit the `index.md` file to change this content.
-
-# Posts
+{% include substack.html %}

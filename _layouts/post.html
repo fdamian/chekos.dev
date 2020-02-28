@@ -51,6 +51,8 @@ layout: default
   <div class="post-content e-content" itemprop="articleBody">
     {{ content | toc  }}
   </div>
+  <!-- substack -->
+  {%- include substack.html -%}
   {%- if page.comments -%}
     {%- include utterances.html -%}
   {%- endif -%}

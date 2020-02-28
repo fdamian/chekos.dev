@@ -9,7 +9,9 @@ layout: default
 
   {{ content }}
 
-
+  <!-- substack -->
+  {%- include substack.html -%}
+  
   {% if site.paginate %}
     {% assign posts = paginator.posts %}
   {% else %}

@@ -6,15 +6,15 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: fastpages
-description: An easy to use blogging platform with support for Jupyter Notebooks.
+title: chekos.dev🤓
+description: Blog personal de Sergio Sánchez (@chekoswh). Existe como prueba de la facilidad de fast_template para crear blogs con markdown y jupyter notebooks.
 github_username: chekos
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "chekos.dev"
 
 # OPTIONAL: override baseurl and url if using a custom domain
 # Note: leave out the trailing / from this value. 
-url: "https://chekos.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+url: "https://chekos.dev" # the base hostname & protocol for your site, e.g. http://example.com
 
 ###########################################################
 #########  Special Instructions for baseurl ###############
@@ -34,26 +34,26 @@ url: "https://chekos.github.io" # the base hostname & protocol for your site, e.
 #
 # 3. You must replace the parameter `baseurl` in _action_files/settings.ini with the same value as you set here but WITHOUT QUOTES.
 #
-baseurl: "/chekos.dev" # the subpath of your site, e.g. "/blog".
+baseurl: "" # the subpath of your site, e.g. "/blog".
 
 # Email and twitter are optional:
-email: 
-twitter_username: "fastdotai"
+email: chekos@tacosdedatos
+twitter_username: "ChekosWH"
 
 # Set this to true to get LaTeX math equation support
-use_math: 
+use_math: true
 
 # Set this to true to display the summary of your blog post under your title on the Home page.
 show_description: true
 
 # Set this to true to display image previews on home page, if they exist
-show_image: false
+show_image: true
 
 # Set this to true to display tags on each post
 show_tags: true
 
 # Add your Google Analytics ID here if you have one and want to use it
-google_analytics:
+google_analytics: "UA-128514155-2"
 
 exclude:
   - CONTRIBUTING.md
@@ -90,3 +90,10 @@ kramdown:
   auto_ids: true
   hard_wrap: false
   syntax_highlighter: rouge
+
+# Customized
+permalink: pretty
+
+# social
+instagram_username: chekos.visuals
+linkedin_username: Chekos
