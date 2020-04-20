@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Sobre chekos.dev
+title: "Sobre chekos.dev"
 permalink: /about/
 ---
 # Sobre chekos.dev
