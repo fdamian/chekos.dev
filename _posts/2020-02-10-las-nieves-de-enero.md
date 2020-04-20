@@ -1,4 +1,5 @@
 ---
+layout: post
 title: "Ya se fueron las nieves de enero"
 description: "Si me sigues en las redes sociales tal vez conozcas de la comunidad tacosdedatos que comencé a inicios del 2019. La idea de tacosdedatos es crear contenido en español. Contenido sobre el análisis y la visualización de datos. Contenido sobre mejores prácticas. Contenido sobre técnicas y tendencias en el mundo de la tecnología que parecen quedarse en el mundo angloparlante por mucho tiempo antes de llegar al mundo hispanohablante."
 toc: true
