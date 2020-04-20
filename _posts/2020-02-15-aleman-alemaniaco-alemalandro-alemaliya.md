@@ -1,5 +1,5 @@
 ---
-title: "Alemán: Alemalacra Alemalandro Alemaliya"
+title: "Alemán - Alemalacra Alemalandro Alemaliya"
 description: "Antes de crear tacosdedatos intenté crear un blog de Hip Hop Latino-americano donde iba a analizar de una manera cuantitativa la calidad de discos y canciones."
 toc: true
 comments: true
