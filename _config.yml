@@ -41,8 +41,6 @@ minima:
   social_links:
     twitter: ChekosWH
     github: chekos
-    instagram: chekos.visuals 
-    linkedin: chekos
 
 
 # Set this to true to get LaTeX math equation support
@@ -61,12 +59,8 @@ show_tags: true
 google_analytics: UA-128514155-2
 
 exclude:
-  - CONTRIBUTING.md
-  - DEVELOPMENT.md
-  - settings.ini
   - docker-compose.yml
   - action.yml
-  - README_TEMPLATE.md
   - Makefile
 
 # this setting allows you to keep pages organized in the _pages folder
