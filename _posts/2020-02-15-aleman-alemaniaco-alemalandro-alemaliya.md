@@ -1,12 +1,11 @@
 ---
-title: "Alemán - Alemalacra Alemalandro Alemaliya"
+title: "Alemán: Alemalacra Alemalandro Alemaliya"
 description: "Antes de crear tacosdedatos intenté crear un blog de Hip Hop Latino-americano donde iba a analizar de una manera cuantitativa la calidad de discos y canciones."
 toc: true
 comments: true
 image: images/posts_imgs/aleman_network_gif.gif
 show_image: true
 categories: [hip hop, aleman]
-
 ---
 
 # Alemán: Alemalacra Alemalandro Alemaliya
