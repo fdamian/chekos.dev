@@ -36,9 +36,14 @@ url: "https://chekos.dev" # the base hostname & protocol for your site, e.g. htt
 #
 baseurl: "" # the subpath of your site, e.g. "/blog".
 
-# Email and twitter are optional:
-email: chekos@tacosdedatos
-twitter_username: "ChekosWH"
+# Github and twitter are optional:
+minima:
+  social_links:
+    twitter: ChekosWH
+    github: chekos
+    instagram: chekos.visuals 
+    linkedin: chekos
+
 
 # Set this to true to get LaTeX math equation support
 use_math: true
@@ -53,7 +58,7 @@ show_image: true
 show_tags: true
 
 # Add your Google Analytics ID here if you have one and want to use it
-google_analytics: "UA-128514155-2"
+google_analytics: UA-128514155-2
 
 exclude:
   - CONTRIBUTING.md
@@ -64,6 +69,16 @@ exclude:
   - README_TEMPLATE.md
   - Makefile
 
+# this setting allows you to keep pages organized in the _pages folder
+include:
+  - _pages
+
+# This specifies what badges are turned on by default for notebook posts.
+default_badges:
+  github: true
+  binder: true
+  colab: true
+
 # Everything below here should be left alone. Modifications may break fastpages
 future: true
 theme: minima
@@ -71,11 +86,21 @@ plugins:
   - jekyll-feed
   - jekyll-gist
   - jekyll-octicons
-  - jekyll-github-metadata
   - jekyll-toc
   - jekyll-twitter-plugin
   - jekyll-relative-links
   - jekyll-seo-tag
+  - jekyll-remote-theme
+  - jekyll-paginate
+  - jekyll-sitemap
+  - jemoji
+
+# See https://jekyllrb.com/docs/pagination/
+# For pagination to work, you cannot have index.md at the root of your repo, instead you must rename this file to index.html
+paginate: 15
+paginate_path: /page:num/
+
+remote_theme: jekyll/minima
 
 titles_from_headings:
   enabled:     true
@@ -95,5 +120,5 @@ kramdown:
 permalink: pretty
 
 # social
-instagram_username: chekos.visuals
-linkedin_username: Chekos
+# instagram_username: chekos.visuals
+# linkedin_username: Chekos
