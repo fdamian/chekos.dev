@@ -3,7 +3,6 @@ layout: page
 title: "Sobre chekos.dev"
 permalink: /about/
 ---
-# Sobre chekos.dev
 
 ¡Hola! Mi nombre es Sergio Sánchez Zavala - creador de [@tacosdedatos](https://twitter.com/tacosdedatos). Aunque ya tenemos un montón de _productos_ como [el sitio web](https://tacosdedatos.com/), [el podcast **tacosdedatos, el podcast**](https://anchor.fm/tacosdedatos), [el podcast **Quail data**](https://anchor.fm/quaildata) (y su sitio [tacosdedatos.fm](https://tacosdedatos.fm)), [el boletín](https://tacosdedatos.substack.com/), [el canal de youtube](https://youtube.com/tacosdedatos) y hasta ["la academia"](https://tacosdedatos.academy/) - aunque todo eso existe hay cosas que me gustaría documentar que simplemente no cuadran con la filosofía de **tacosdedatos**. 
 
