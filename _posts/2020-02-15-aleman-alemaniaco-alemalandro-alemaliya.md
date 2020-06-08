@@ -74,39 +74,13 @@ Muchos son artistas de rap y hip-hop pero también hay artistas de pop, rock en 
 
 Alemán está entre los más populares de este universo lo cual me estoy tomando la libertad de etiquetar como positivo. De alguna manera, este artista underground que llegó a esta altura le está abriendo la puerta a todos estos demás artistas con menos popularidad. Mínimo, Spotify los identifica como artistas relacionados y tal vez aparezcan en una de esas listas de reproducción automatizadas juntos 🤷🏻‍♂️
 
-<div id="visual"></div>
-
+<div id="observablehq-08d7469c">
+  <div class="observablehq-chart"></div>
+</div>
 <script type="module">
-
-  // NOTEBOOK CONFIGURATION
-  import notebook from "https://api.observablehq.com/@chekos/aleman-beeswarm-plot-using-spotify-data.js";
-
-
-  const target = document.querySelector("#visual");
-  const renders = {
-    // "viewof p": "p",
-    "chart": "div.fullwidth",
-  };
-
-
-  // BOILERPLATE
-  import {Inspector, Runtime} from "https://unpkg.com/@observablehq/notebook-runtime@2?module";
-  for (let i in renders) {
-    let s = renders[i], a = s.match(/^\w+/);
-    if (a) {
-      renders[i] = document.createElement(a[0]);
-      target.appendChild(renders[i]);
-      if (a = s.match(/\.(\w+)$/))
-        renders[i].className = a[1]; 
-    }
-    else
-      renders[i] = document.querySelector(renders[i]);
-  }
-  Runtime.load(notebook, (variable) => {
-    if (renders[variable.name]) {
-      return new Inspector(renders[variable.name]);
-    } else {
-      // return true; // uncomment to run hidden cells
-    }
+  import {Runtime, Inspector} from "https://cdn.jsdelivr.net/npm/@observablehq/runtime@4/dist/runtime.js";
+  import define from "https://api.observablehq.com/@chekos/aleman-beeswarm-plot-using-spotify-data.js?v=3";
+  (new Runtime).module(define, name => {
+    if (name === "chart") return Inspector.into("#observablehq-08d7469c .observablehq-chart")();
   });
 </script>
