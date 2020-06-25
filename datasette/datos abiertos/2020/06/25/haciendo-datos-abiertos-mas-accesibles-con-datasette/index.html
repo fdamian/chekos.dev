@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Haciendo datos abiertos más accesibles con datasette | chekos.dev🤓</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Haciendo datos abiertos más accesibles con datasette" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Proporcionar los datos es el primer paso, pero para que sean utilizables y accesibles para la mayoría de las personas, no podemos simplemente publicar datos." />
+<meta property="og:description" content="Proporcionar los datos es el primer paso, pero para que sean utilizables y accesibles para la mayoría de las personas, no podemos simplemente publicar datos." />
+<link rel="canonical" href="https://chekos.dev/datasette/datos%20abiertos/2020/06/25/haciendo-datos-abiertos-mas-accesibles-con-datasette/" />
+<meta property="og:url" content="https://chekos.dev/datasette/datos%20abiertos/2020/06/25/haciendo-datos-abiertos-mas-accesibles-con-datasette/" />
+<meta property="og:site_name" content="chekos.dev🤓" />
+<meta property="og:image" content="https://chekos.dev/images/posts_imgs/datasette-blog.jpeg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-25T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Proporcionar los datos es el primer paso, pero para que sean utilizables y accesibles para la mayoría de las personas, no podemos simplemente publicar datos.","@type":"BlogPosting","headline":"Haciendo datos abiertos más accesibles con datasette","dateModified":"2020-06-25T00:00:00-05:00","datePublished":"2020-06-25T00:00:00-05:00","image":"https://chekos.dev/images/posts_imgs/datasette-blog.jpeg","url":"https://chekos.dev/datasette/datos%20abiertos/2020/06/25/haciendo-datos-abiertos-mas-accesibles-con-datasette/","mainEntityOfPage":{"@type":"WebPage","@id":"https://chekos.dev/datasette/datos%20abiertos/2020/06/25/haciendo-datos-abiertos-mas-accesibles-con-datasette/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://chekos.dev/feed.xml" title="chekos.dev🤓" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-128514155-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+<link rel="shortcut icon" type="image/x-icon" href="/images/favicon.ico"><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>Haciendo datos abiertos más accesibles con datasette | chekos.dev🤓</title>
+<meta name="generator" content="Jekyll v4.0.0" />
+<meta property="og:title" content="Haciendo datos abiertos más accesibles con datasette" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Proporcionar los datos es el primer paso, pero para que sean utilizables y accesibles para la mayoría de las personas, no podemos simplemente publicar datos." />
+<meta property="og:description" content="Proporcionar los datos es el primer paso, pero para que sean utilizables y accesibles para la mayoría de las personas, no podemos simplemente publicar datos." />
+<link rel="canonical" href="https://chekos.dev/datasette/datos%20abiertos/2020/06/25/haciendo-datos-abiertos-mas-accesibles-con-datasette/" />
+<meta property="og:url" content="https://chekos.dev/datasette/datos%20abiertos/2020/06/25/haciendo-datos-abiertos-mas-accesibles-con-datasette/" />
+<meta property="og:site_name" content="chekos.dev🤓" />
+<meta property="og:image" content="https://chekos.dev/images/posts_imgs/datasette-blog.jpeg" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2020-06-25T00:00:00-05:00" />
+<script type="application/ld+json">
+{"description":"Proporcionar los datos es el primer paso, pero para que sean utilizables y accesibles para la mayoría de las personas, no podemos simplemente publicar datos.","@type":"BlogPosting","headline":"Haciendo datos abiertos más accesibles con datasette","dateModified":"2020-06-25T00:00:00-05:00","datePublished":"2020-06-25T00:00:00-05:00","image":"https://chekos.dev/images/posts_imgs/datasette-blog.jpeg","url":"https://chekos.dev/datasette/datos%20abiertos/2020/06/25/haciendo-datos-abiertos-mas-accesibles-con-datasette/","mainEntityOfPage":{"@type":"WebPage","@id":"https://chekos.dev/datasette/datos%20abiertos/2020/06/25/haciendo-datos-abiertos-mas-accesibles-con-datasette/"},"@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+
+<link href="https://unpkg.com/@primer/css/dist/primer.css" rel="stylesheet" />
+<link rel="stylesheet" href="//use.fontawesome.com/releases/v5.0.7/css/all.css"><link type="application/atom+xml" rel="alternate" href="https://chekos.dev/feed.xml" title="chekos.dev🤓" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');ga('create','UA-128514155-2','auto');ga('require','displayfeatures');ga('send','pageview');</script>
+
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.css" integrity="sha384-zB1R0rpPzHqg7Kpt0Aljp8JPLqbXI3bhnPWROx27a9N0Ll6ZP/+DiW/UqRcLbRjq" crossorigin="anonymous">
+    <script type="text/javascript" async src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"> </script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/katex.min.js" integrity="sha384-y23I5Q6l+B6vatafAwxRu/0oK/79VlbSz7Q9aiSZUvyWYIYsd+qj+o24G5ZU2zJz" crossorigin="anonymous"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.11.1/dist/contrib/auto-render.min.js" integrity="sha384-kWPLUVMOks5AQFrykwIup5lo0m3iMkkHrD0uJ4H5cjeGihAutqP0yW0J6dpFiVkI" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head><body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">chekos.dev🤓</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">Sobre chekos.dev</a><a class="page-link" href="/search/">Search</a><a class="page-link" href="/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Haciendo datos abiertos más accesibles con datasette</h1><p class="page-description">Proporcionar los datos es el primer paso, pero para que sean utilizables y accesibles para la mayoría de las personas, no podemos simplemente publicar datos.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-06-25T00:00:00-05:00" itemprop="datePublished">
+        Jun 25, 2020
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      22 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/categories/#datasette">datasette</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/categories/#datos abiertos">datos abiertos</a>
+        
+      
+      </p>
+    
+
+    </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul class="section-nav">
+<li class="toc-entry toc-h2"><a href="#prólogo">prólogo</a></li>
+<li class="toc-entry toc-h2"><a href="#sobre-los-datos">sobre los datos</a></li>
+<li class="toc-entry toc-h2"><a href="#sobre-datasette">sobre datasette</a></li>
+<li class="toc-entry toc-h2"><a href="#paso-paso-a-pasito">paso, paso a pasito</a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#adquiriendo-los-datos">adquiriendo los datos</a></li>
+<li class="toc-entry toc-h3"><a href="#preparando-los-datos">preparando los datos</a></li>
+<li class="toc-entry toc-h3"><a href="#sirviendo-los-datos">sirviendo los datos</a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#desplegando-en-heroku">desplegando en heroku</a></li>
+<li class="toc-entry toc-h2"><a href="#automatizando-todo">automatizando todo</a></li>
+<li class="toc-entry toc-h2"><a href="#github-actions">GitHub Actions</a></li>
+<li class="toc-entry toc-h2"><a href="#bonus">bonus</a></li>
+<li class="toc-entry toc-h2"><a href="#cuanto-tiempo-tomó">cuanto tiempo tomó</a></li>
+<li class="toc-entry toc-h2"><a href="#llamado-a-la-acción">llamado a la acción</a></li>
+</ul><p>California recientemente liberó datos sobre las detenciones hechas por oficiales de las 8 agencias más grandes del estado. Estos datos cubren los meses de julio a diciembre del 2018. Esta fue la primera ola de divulgación de datos que entrará en vigencia en los años siguientes. Los datos cubrieron más de 1.8 millones de paradas en todo el estado. Si bien este es un paso en la dirección correcta, un solo archivo <code class="highlighter-rouge">.csv</code> de alrededor de 640 megabytes con más de 1.8 millones de filas y más de 140 columnas podría ser intimidante para algunas personas que se beneficiarían de la exploración de estos datos: líderes locales, periodistas, activistas y organizadores, por nombrar algunos.</p>
+
+<p>El tercer principio de la <a href="https://opendatacharter.net/principles-es/">carta internacional de datos abiertos</a> es que los datos deben ser accesibles y utilizables.</p>
+
+<p>Proporcionar los datos es el primer paso, pero para que sean utilizables y accesibles para la mayoría de las personas, no podemos simplemente publicar datos; debemos tener en cuenta la experiencia del usuario y desarrollar formas de facilitar la exploración y el uso de dichos datos.</p>
+
+<p>En este tutorial, comparto una forma de hacerlo: usando <strong>datasette</strong>, una <em>“herramienta de Python para explorar y publicar datos. Ayuda a las personas a tomar datos de cualquier forma o tamaño y publicarlos como un sitio web interactivo y explorable y con una API acompañante”.</em></p>
+
+<p>Tomamos los datos de detención policial lanzados recientemente por California, los limpiamos y transformamos a como sea necesario, y desplegamos una instancia de <strong>datasette</strong> en Heroku.</p>
+
+<h2 id="prólogo">
+<a class="anchor" href="#pr%C3%B3logo" aria-hidden="true"><span class="octicon octicon-link"></span></a>prólogo</h2>
+
+<p>La idea de explorar este conjunto de datos vino al escuchar el episodio del 3 de marzo del 2020 del podcast <strong>Pod Save the People</strong>. (minuto 4:12)</p>
+
+<iframe src="https://open.spotify.com/embed-podcast/episode/1mp0laka9Hkw5jUboBl0Sm" width="100%" height="232" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+
+<p>donde mencionan un artículo de <em>The Appeal</em>:</p>
+
+<blockquote>
+  <p><em>Boudin will announce a second directive today, also reviewed by The Appeal, on what are known as pre-textual stops, in which an officer stops someone for a minor offense or infraction, such as a traffic violation, in order to conduct an unrelated search for items like guns or drugs. According to the new policy, the DA’s office will not prosecute possession of contraband cases when the contraband was collected as a result of an infraction-related stop, “where there is no other articulable suspicion of criminal activity.” Any deviations from the policy should be made in writing and require approval from the DA or a chief of the criminal division. Additionally, the ban includes cases in which a person consented to a search “because of the long-standing and documented racial and ethnic disparities in law enforcement requests for consent to search,” according to the directive.</em> <br> - <a href="https://theappeal.org/san-francisco-da-to-announce-sweeping-changes-on-sentencing-policy-and-police-stops/">https://theappeal.org/san-francisco-da-to-announce-sweeping-changes-on-sentencing-policy-and-police-stops/</a></p>
+</blockquote>
+
+<p>En el episodio, Sam Sinyangwe menciona que las personas negras y de color están siendo detenidas y registradas a tasas más altas, y que muchos de estos registros son lo que se conocen como ‘registros consensuales’, lo que significa que la policía no informa ninguna justificación para registrar a la persona mas que preguntar a esa persona si puede registrarlos y que la persona presuntamente da su consentimiento.</p>
+
+<p>Esta gran disparidad racial es desgarradora pero no es sorpresa.</p>
+
+<p>Cuando comencé a trabajar con el conjunto de datos me pareció un tanto íncomodo, no era fácil. El tamaño del conjunto de los datos hace que sea díficil trabajar con él para aquellas personas que no analizan datos programáticamente; ya sea con recursos pagados como stata y sas o gratuitos como python y R.</p>
+
+<p>Esta información no esta diseñada para ser explorada fácilmente pero existen herramientas que pueden ayudar con eso.</p>
+
+<blockquote>
+  <p>💡<strong>Nota</strong>: AB-953, el proyecto de ley que requiere que las agencias reporten todos los datos sobre paradas al Procurador General, no requiere que los datos sean fácilmente “explorables” o “accesibles”. El proyecto de ley requiere que los datos sean recopilados y reportados al Procurador General. Este conjunto de datos tal como es sirve para ese propósito.</p>
+</blockquote>
+
+<h2 id="sobre-los-datos">
+<a class="anchor" href="#sobre-los-datos" aria-hidden="true"><span class="octicon octicon-link"></span></a>sobre los datos</h2>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*tDeVEZl_Dbe0DdwkCMPAKQ.png" alt="**source:** &lt;https://openjustice.doj.ca.gov/data&gt;"></p>
+
+<p>El conjunto de datos está compuesto por un archivo <code class="highlighter-rouge">.csv</code> de 641.4 MB que contiene 1.8 millones de filas y 143 columnas. Cada parada tiene un <code class="highlighter-rouge">DOJ_RECORD_ID</code> único y cada persona detenida tiene un <code class="highlighter-rouge">PERSON_NUMBER</code>. En total, hay 1,708,377 paradas en este conjunto de datos que involucran a 1,800,054 personas.</p>
+
+<p>El conjunto de datos incluye información básica sobre cada parada (como duración, hora del día, ciudad más cercana, nombre de la agencia), <strong>información demográfica percibida</strong> (raza / etnia, género, edad, discapacidad), así como información sobre el motivo de detener, buscar, incautar, acciones tomadas durante la detención, contrabando o evidencia encontrada, etc. Para obtener información más detallada sobre el conjunto de datos, se puede leer el archivo README que reunió el Departamento de Justicia y el Informe Anual 2020.</p>
+
+<blockquote>
+  <p>💡<strong>Nota</strong>: Los datos reflejan la percepción del oficial. Son datos demográficos <em>percibidos</em>, es decir, si pareces hispano, te marcan como hispano. Si pareces de 27 años te marcan de 27 años. Este es otro problema para otra ocasión pero hay que tenerlo en mente cuando trabajamos con estos datos.</p>
+</blockquote>
+
+<p>Esta es la Ola I de una serie de datos de la <em>Racial and Identity Profiling Act</em> (RIPA) que se lanzarán en los años siguientes. Los datos publicados sobre esta ola pertenecen a las 8 agencias de aplicación de la ley (LEA, por sus siglas en inglés) más grandes de California (las que emplean a más de 1,000 oficiales). Estas LEA (y su parte de las observaciones totales) son:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">
+<em>Law enforcement agency</em> (LEA)</th>
+      <th style="text-align: center">N</th>
+      <th style="text-align: center">%</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">California Highway Patrol </td>
+      <td style="text-align: center"> 1,033,421</td>
+      <td style="text-align: center">57.4%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Los Angeles Police Department</td>
+      <td style="text-align: center">  336,681</td>
+      <td style="text-align: center">18.7%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Los Angeles Sheriff Department   </td>
+      <td style="text-align: center">   136,635</td>
+      <td style="text-align: center">7.59%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">San Diego Police Department   </td>
+      <td style="text-align: center">    89,455</td>
+      <td style="text-align: center">4.97%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">San Bernardino Sheriff Department </td>
+      <td style="text-align: center">    62,433</td>
+      <td style="text-align: center">3.47%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">San Francisco Police Department </td>
+      <td style="text-align: center">    56,409</td>
+      <td style="text-align: center">3.14%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Riverside Sheriff Department   </td>
+      <td style="text-align: center">    44.505</td>
+      <td style="text-align: center">2.47%</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">San Diego Sheriff Department   </td>
+      <td style="text-align: center">    40,515</td>
+      <td style="text-align: center">2.25%</td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <tbody>
+    <tr>
+      <td><a href="https://data-openjustice.doj.ca.gov/sites/default/files/dataset/2020-01/RIPA%20Dataset%20Read%20Me%2020200106.pdf">README</a></td>
+      <td><a href="https://oag.ca.gov/sites/all/files/agweb/pdfs/ripa/ripa-board-report-2020.pdf">Informe Anual 2020</a></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="sobre-datasette">
+<a class="anchor" href="#sobre-datasette" aria-hidden="true"><span class="octicon octicon-link"></span></a>sobre datasette</h2>
+
+<blockquote>
+  <p><strong>Datasette</strong> <em>es una herramienta para explorar y publicar datos. Ayuda a las personas a tomar datos de cualquier forma o tamaño y publicarlos como un sitio web interactivo y explorable y la API que lo acompaña. <strong>Datasette</strong> está dirigido a periodistas de datos, conservadores de museos, archiveros, gobiernos locales y cualquier otra persona que tenga datos que deseen compartir con el mundo. Es parte de un ecosistema más amplio de herramientas y complementos dedicados a hacer que trabajar con datos estructurados sea lo más productivo posible .</em> <br> - <a href="https://datasette.readthedocs.io/"><em>datasette.readthedocs.io</em></a></p>
+</blockquote>
+
+<p><strong>datasette</strong> es el motor que impulsa este proyecto. En resumen, toma una base de datos sqlite y crea un <em>sitio web interactivo y explorable y API que lo acompaña</em>. Para preparar los datos, utilizamos <code class="highlighter-rouge">csvs-to-sqlite</code>, otra herramienta del ecosistema <strong>datasette</strong> que toma archivos CSV y crea bases de datos sqlite a partir de ellos.</p>
+
+<p>Puedes encontrar ejemplos de <strong>datasette</strong>s públicos en el <a href="https://github.com/simonw/datasette/wiki/Datasettes">wiki del repositorio en GitHub</a>. Aquí se encuentra uno siriviendo los conjuntos de datos publicados por FiveThirtyEight (puedes encontrarlos en su <a href="https://github.com/fivethirtyeight/data">repositorio de GitHub</a>): <a href="https://fivethirtyeight.datasettes.com/">https://fivethirtyeight.datasettes.com/</a></p>
+
+<p>La página principal muestra la licencia y la fuente de la base de datos. También provee acceso rápido a algunas de sus tablas.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*y1-FwGc2JhX_1ocHz7TXBA.png" alt=""></p>
+
+<p>Si haces clic en el nombre de la base de datos, proporcionará una vista de todas sus tablas y un cuadro de texto para que ejecute consultas SQL personalizadas. Esta es una de las características que hace que <strong>datasette</strong> sea una herramienta tan poderosa.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*7QZ3wF9k2TbMd79dauftng.png" alt=""></p>
+
+<p>Si haces clic en una de las tablas, verás las facetas sugeridas, un botón de filtro fácil de usar, un enlace JSON y CSV que proporcionará la tabla como uno de esos formatos (esto significa que puede usar esto como API) y una descripción de la tabla. En este caso, la descripción contiene una tabla HTML con encabezados y definiciones.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*QWaKpYg7mgvGcbeI0Kcwmw.png" alt=""></p>
+
+<p>Si haces clic en el botón “View and edit SQL”, volverás a tener acceso a un cuadro de texto para escribir sus propias consultas.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*e_nW20lBbSPRAgXLYkgYng.png" alt=""></p>
+
+<p><strong>datasette</strong> es parte de un ecosistema de herramientas y <em>plugins</em>. Puedes agregar el <em>plugin</em> <strong>datasette-vega</strong> (<a href="https://github.com/simonw/datasette-vega">repo</a>) para agregar visualizaciones interactivas de la tabla (hechas con <a href="https://altair-viz.github.io/">altair</a>)</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*zZ7i8wiP7yBc-cKx7tPW8w.png" alt=""></p>
+
+<p>Así es como se ve un sitio web básico de <strong>datasette</strong> pero <strong>datasette</strong> es altamente personalizable. Tomemos, por ejemplo, el <strong>datasette</strong> de The Baltimore Sun para que las personas exploren los registros de salarios públicos que se actualizan anualmente.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*z4OxKW3TwU4l3AsN2Xm0lQ.png" alt=""></p>
+
+<p>Esto esta corriendo <strong>datasette</strong> detrás de cámaras pero The Baltimore Sun agrego sus propias plantillas y archivos CSS y JS. Para aprender más sobre como personalizar <strong>datasette</strong> visita <a href="https://datasette.readthedocs.io/en/stable/custom_templates.html">https://datasette.readthedocs.io/en/stable/custom_templates.html</a></p>
+
+<h2 id="paso-paso-a-pasito">
+<a class="anchor" href="#paso-paso-a-pasito" aria-hidden="true"><span class="octicon octicon-link"></span></a>paso, paso a pasito</h2>
+
+<p>Esta sección es una descripción más técnica del proyecto. La preparación y despliegue de datos con <strong>datasette</strong> es bastante sencillo y se puede dividir en tres fases:</p>
+
+<ul>
+  <li>Adquirir los datos</li>
+  <li>Preparar los datos</li>
+  <li>Servir los datos</li>
+</ul>
+
+<h3 id="adquiriendo-los-datos">
+<a class="anchor" href="#adquiriendo-los-datos" aria-hidden="true"><span class="octicon octicon-link"></span></a>adquiriendo los datos</h3>
+
+<p>Los datos se obtuvieron del sitio web de Open Justice del Departamento de Justicia de California: <a href="https://openjustice.doj.ca.gov/data">https://openjustice.doj.ca.gov/data</a>. El sitio web proporciona un enlace para descargar los datos (por lo menos desde 5 de mayo de 2020, cuando lo descargué para este proyecto). Para obtener más información sobre los datos en sí, puede leer la sección <a href="https://github.com/chekos/RIPA-2018-datasette#about-the-data">Acerca de los datos</a> en el repositorio de GitHub del proyecto.</p>
+
+<h3 id="preparando-los-datos">
+<a class="anchor" href="#preparando-los-datos" aria-hidden="true"><span class="octicon octicon-link"></span></a>preparando los datos</h3>
+
+<p>El CSV original es de mas de 640 MB así que el primer paso es dividirlo en 15 archivos para que cada uno pueda subirse a GitHub en este repositorio.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="n">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">THIS_FILE</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">__file__</span><span class="p">)</span>
+<span class="n">THIS_DIR</span> <span class="o">=</span> <span class="n">THIS_FILE</span><span class="o">.</span><span class="n">parent</span>
+<span class="n">EXTERNAL_DATA</span> <span class="o">=</span> <span class="n">THIS_DIR</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s">"./../../data/external/"</span><span class="p">)</span>
+<span class="n">INTERIM_DATA</span> <span class="o">=</span> <span class="n">THIS_DIR</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="s">"./../../data/interim/"</span><span class="p">)</span>
+
+<span class="n">FULL_DB</span> <span class="o">=</span> <span class="s">"RIPA Stop Data 2018.csv"</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">EXTERNAL_DATA</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">FULL_DB</span><span class="p">))</span>
+
+<span class="n">dfs</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">df</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">dfs</span><span class="p">):</span>
+    <span class="k">print</span><span class="p">(</span><span class="n">f</span><span class="s">"Saving dataset #{idx}"</span><span class="p">)</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">INTERIM_DATA</span><span class="o">.</span><span class="n">joinpath</span><span class="p">(</span><span class="n">f</span><span class="s">"ripa-2018-part-{idx}.csv"</span><span class="p">),</span> <span class="n">index</span> <span class="o">=</span> <span class="bp">False</span><span class="p">)</span>
+</code></pre></div></div>
+<p>- <a href="https://github.com/chekos/RIPA-2018-datasette/blob/fea53ce60ae43f0d7b0dd130109a01496f08e20a/src/data/split_data.py#L1-L16">https://github.com/chekos/RIPA-2018-datasette/blob/fea53ce60ae43f0d7b0dd130109a01496f08e20a/src/data/split_data.py#L1-L16</a></p>
+
+<blockquote>
+  <p>💡¿<strong>Por qué</strong>? Nomás por si desaparece misteriosamente de la fuente original…</p>
+</blockquote>
+
+<p>Sin embargo, debido a que el conjunto de datos es demasiado grande para servir como una sola tabla (1,8 millones de filas por 143 columnas), también se dividió en tablas más pequeñas. Esto significa que tomamos variables relacionadas (basadas en sus sufijos) y las extrajimos en sus propias tablas. Por ejemplo, variables relacionadas con el género como <code class="highlighter-rouge">G_FULL</code>,<code class="highlighter-rouge"> G_MALE</code>, <code class="highlighter-rouge">G_FEMALE</code>,<code class="highlighter-rouge"> G_TRANSGENDER_MAN</code>, <code class="highlighter-rouge">G_TRANSGENDER_WOMAN</code>,<code class="highlighter-rouge">G_GENDER_NONCOMFORMING</code>, y <code class="highlighter-rouge">G_MULTIGENDER</code> se extrajeron de la tabla “principal “y se agregaron a una tabla de <strong>género</strong> en la base de datos.</p>
+
+<p>Estas se pueden volver a unir a la tabla principal utilizando un <strong>UNIQUE_ID</strong> asignado a ellas.</p>
+
+<blockquote>
+  <p>Este script es demasiado grande para incluir en este blog sin crear una distracción inecesaria pero puedes ver las 91 líneas de código aquí: <a href="https://github.com/chekos/RIPA-2018-datasette/blob/master/src/data/break_down_database.py">https://github.com/chekos/RIPA-2018-datasette/blob/master/src/data/break_down_database.py</a></p>
+</blockquote>
+
+<p>A cada observación o fila de este conjunto de datos se le asigna un <code class="highlighter-rouge">DOJ_RECORD_ID</code> y un<code class="highlighter-rouge"> PERSON_NUMBER</code>. Estos son exclusivos de la parada y las personas detenidas, respectivamente. Esto significa que podríamos combinarlos para crear un ‘ID ÚNICO’ para cada fila que podríamos usar para unir tablas. Sin embargo, esto termina siendo una cadena de 22 caracteres que es innecesariamente grande. Para facilitar las cosas, a cada fila se le asigna una identificación numérica que comienza en 1,000,000. Comenzar en un millón es completamente arbitrario, podríamos haber comenzado en cero, pero debido a que hay 1.8 millones de filas, tomamos la decisión de que cada identificación numérica sea de siete dígitos. Este <code class="highlighter-rouge">UNIQUE_ID</code> numérico nos permite unir tablas juntas <strong>y</strong> no es una gran adición a la base de datos en términos de memoria.</p>
+
+<p>Una vez que se ha creado este <code class="highlighter-rouge">ID_ÚNICO</code>, podemos extraer columnas de la tabla “principal” en sus propias tablas y guardarlas como archivos CSV individuales con la certeza de que cada observación puede coincidir en estas nuevas tablas.</p>
+
+<p>Luego usamos <code class="highlighter-rouge">csvs-to-sqlite</code> para crear una base de datos sqlite donde cada CSV es una tabla. En este paso, también incluimos el archivo <strong>Appendix B Table 3.csv</strong> obtenido también del sitio web del DOJ y cualquier otra tabla complementaria que podríamos haber creado para acompañar el conjunto de datos.</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>csvs-to-sqlite data/processed/*.csv "data/external/Appendix B Table 3.csv" datasette/ripa-2018-db.db
+</code></pre></div></div>
+
+<h3 id="sirviendo-los-datos">
+<a class="anchor" href="#sirviendo-los-datos" aria-hidden="true"><span class="octicon octicon-link"></span></a>sirviendo los datos</h3>
+
+<p>Después de preparar los datos y crear una base de datos sqlite usamos <strong>datasette</strong> para servirlos como un sitio web interactivo y su API. Esto es tan fácil como ejecutar</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>datasette ripa-2018.db
+</code></pre></div></div>
+
+<p>Pero para este proyecto personalizamos nuestro <strong>datasette</strong> un poco.</p>
+
+<p>Incluimos un tîtulo, una descripción, la url de la fuente de los datos y archivos CSS y JS. Puedes explorar el archivo <code class="highlighter-rouge">metadata.json</code> en el repositorio <a href="https://github.com/chekos/RIPA-2018-datasette/blob/master/datasette/metadata.json">datasette/metadata.json</a> para ver que más hicimos.</p>
+
+<p>También incluímos lo que <strong>datasette</strong> llama <em>canned queries</em>, lo que sería “consultas almacenadas” (?). Estas son consultas de SQL incluídas en tu instancia que aparecen al fondo de tu página principal y tiene su propio URL para facilitar el acceso. Estas consultas las incluimos porque muestran información útil y/o interesante de los datos. Algunas de ellas son consultas que computan información especifica publicada en el reporte anual del 2020.</p>
+
+<p>También modificamos algunas plantillas de <strong>datasette</strong>, especificamente <code class="highlighter-rouge">base.html</code> y <code class="highlighter-rouge">query.html</code>. La primera fue modificada para incluir metadatos en la etiqueta <code class="highlighter-rouge">&lt;head&gt;</code> (descripción del sitio, por ejemplo, para cuando se comparta un enlace). La segunda fue modificada para incluir un botón debajo del cuadro de texto donde escribes tus consultas de SQL. Este botón sirve para facilitar las sugerencias de consultas para el repositorio. Al hacer clic, se abre otra ventana en tu navegador que crea un nuevo <em>issue</em> en github con la consulta de SQL que acabas de ejecutar.</p>
+
+<p>También cambiamos algunas opciones para <strong>datasette</strong>:</p>
+<ol>
+  <li>
+<code class="highlighter-rouge">default_page_size:50</code> - Muestra solo 50 resultados por página</li>
+  <li>
+<code class="highlighter-rouge">sql_time_limit_ms:30000</code> - Un límite de 30 segundos para ejecutar consultas (es el límite de tiempo de Heroku)</li>
+  <li>
+<code class="highlighter-rouge">facet_time_limit_ms:10000</code> - El tiempo límite que <strong>datasette</strong> debería usar calculando una posible faceta de tu tabla (el default es de 200ms pero nuestro conjunto de datos es tan grande que lo expandimos a 10 segundos)</li>
+</ol>
+
+<p>El código por ejecutar es:</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>datasette ripa-2018-db.db <span class="se">\\</span>
+  <span class="nt">-m</span> metadata.json <span class="se">\\</span>
+  <span class="nt">--extra-options</span><span class="o">=</span><span class="s2">"--config default_page_size:50 --config sql_time_limit_ms:30000 --config facet_time_limit_ms:10000"</span>
+</code></pre></div></div>
+
+<h2 id="desplegando-en-heroku">
+<a class="anchor" href="#desplegando-en-heroku" aria-hidden="true"><span class="octicon octicon-link"></span></a>desplegando en heroku</h2>
+
+<p>Aquí hay una descripción general de alto nivel del proceso</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*DGg6BYW2iexf2SsFrQnpig.png" alt="&lt;https://github.com/chekos/RIPA-2018-datasette&gt;"></p>
+
+<p>Hasta ahora, utilizamos un código de Python para procesar nuestros datos (creando un <code class="highlighter-rouge">UNIQUE_ID</code> y desglosando el conjunto de datos original con 143 columnas en varios archivos<code class="highlighter-rouge"> .csv</code> más pequeños) y también utilizamos <code class="highlighter-rouge">csvs-to-sqlite</code> para construir nuestra base de datos <code class="highlighter-rouge">ripa-2018-db.db</code> de esos archivos<code class="highlighter-rouge"> .csv</code>. Hasta ahora, hemos estado interactuando con nuestro <strong>datasette</strong> ejecutando el comando <code class="highlighter-rouge">datasette ripa-2018-db.db</code> que ejecuta un servidor local. Para que nuestro <strong>datasette</strong> esté disponible para el mundo, tenemos que implementarlo en línea y, por suerte, es muy, muy fácil de hacer, ya que <strong>datasette</strong> ya incluye un comando de publicación.</p>
+
+<p>Con <strong>datasette</strong> puedes publicar directamente a <a href="https://datasette.readthedocs.io/en/stable/publish.html#publishing-to-heroku">Heroku</a>, <a href="https://datasette.readthedocs.io/en/stable/publish.html#publishing-to-google-cloud-run">Google Cloud Run</a>, o <a href="https://datasette.readthedocs.io/en/stable/publish.html#publishing-to-fly">Fly</a> (por lo menos desde la versión 0.42 que es la que utilizamos en este proyecto). Debido a que tengo experiencia previa en la implementación de heroku, me pareció la más fácil de las tres, pero todas son excelentes opciones y la documentación es fácil de seguir.</p>
+
+<p>Implementar en Heroku fue tan fácil como ejecutar casi el mismo comando utilizado para servir nuestro <strong>datasette</strong> localmente.</p>
+
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>datasette publish heroku ripa-2018-db.db <span class="se">\\</span>
+  <span class="nt">--name</span> ripa-2018-db <span class="se">\\</span>
+  <span class="nt">-m</span> metadata.json <span class="se">\\</span>
+  <span class="nt">--extra-options</span><span class="o">=</span><span class="s2">"--config default_page_size:50 --config sql_time_limit_ms:30000 --config facet_time_limit_ms:10000"</span>
+</code></pre></div></div>
+
+<blockquote>
+  <p>💡 <strong>Nota</strong> la bandera <code class="highlighter-rouge">--name</code> que espcifíca el nombre de nuestra aplicación en Heroku. Esto significa que la publicará a <a href="http://ripa-2018-db.herokuapp.com">ripa-2018-db.herokuapp.com</a> y sobreescribirá cualquier aplicación previa ahí.</p>
+</blockquote>
+
+<p>Para ejecutar esto, necesitará una <a href="https://signup.heroku.com/">cuenta heroku</a> e instalar la herramienta de <a href="https://devcenter.heroku.com/articles/heroku-cli">línea de comandos de heroku</a>. <strong>Datasette</strong> (usando el la herramienta de línea de comandos) te pedirá que inicies sesión y abrirá una ventana del navegador para que lo haga. Después de iniciar sesión, se encargará del resto.</p>
+
+<p>¡Listo! En este punto, hemos publicado con éxito nuestro <strong>datasette</strong> en heroku y podemos visitar <a href="http://ripa-2018-db.herokuapp.com">ripa-2018-db.herokuapp.com</a> o <a href="http://ripa-2018.datasettes.cimarron.io/">ripa-2018.datasettes.cimarron.io/</a></p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*fuSRYs18jGBzkvlN60pDLA.gif" alt="&lt;http://ripa-2018.datasettes.cimarron.io/&gt;"></p>
+
+<p>Este será el final de este proceso para muchas personas. Adquirimos y transformamos con éxito algunos datos y los desplegamos en la nube para que otros puedan explorar e interactuar con ellos. También hemos incluido una descripción HTML que describe nuestro <strong>datasette</strong> para los usuarios e incluso algunas <em>consultas almacenadas</em> para que las personas reproduzcan algunos de los hechos publicados en el Informe Anual 2020.</p>
+
+<h2 id="automatizando-todo">
+<a class="anchor" href="#automatizando-todo" aria-hidden="true"><span class="octicon octicon-link"></span></a>automatizando todo</h2>
+
+<p>Si bien los datos subyacentes que estas publicando no cambian con frecuencia, es posible que desees automatizar la implementación de su instancia de <strong>datasette</strong> por muchas razones. Por ejemplo, cuando comencé este proyecto, <strong>datasette</strong> estaba en la versión 0.40 y en el momento en que escribo esta publicación está en la versión 0.42. Para la mayoría de las versiones no necesitarás actualizar tu instancia de <strong>datasette</strong>, pero la versión 0.41 incluía la capacidad de crear páginas personalizadas (<a href="https://datasette.readthedocs.io/en/stable/changelog.html#v0-41">changelog</a>).</p>
+
+<blockquote>
+  <p>For example, adding a template file called <code class="highlighter-rouge">templates/pages/about.html</code> will result in a new page being served at <code class="highlighter-rouge">/about</code>  on your instance.</p>
+</blockquote>
+
+<p>Esto significa que podemos agregar mucho más contexto en nuestra instancia para los usuarios. Tal vez incluya una guía paso a paso para ayudar a las personas a contribuir al proyecto, otros enlaces útiles o una página simple para presentarse para que las personas que usan estos datos aprendan un poco más sobre ti.</p>
+
+<p>También es posible que desee incluir más <em>consultas almacenadas</em> o corregir un error ortográfico en su descripción. Cualquiera sea la razón, la implementación automática es fácil de lograr. En definitiva, todo lo que necesita es ejecutar <code class="highlighter-rouge">datasette heroku publishing</code>, que es un caso de uso perfecto para las GitHub Actions.</p>
+
+<blockquote>
+  <p>🚨 <strong><em>Advertencia / Nota</em></strong>: Esta próxima parte se vuelve mucho más técnica rápidamente. GitHub Actions es un tema más avanzado. Si no necesitas / deseas actualizar su instancia de datasette recientemente implementada regularmente, no recomendaría pensar en las GitHub Actions por el momento.</p>
+</blockquote>
+
+<hr>
+
+<h2 id="github-actions">
+<a class="anchor" href="#github-actions" aria-hidden="true"><span class="octicon octicon-link"></span></a>GitHub Actions</h2>
+
+<blockquote>
+  <p>GitHub Actions help you automate your software development workflows in the same place you store code and collaborate on pull requests and issues. You can write individual tasks, called actions, and combine them to create a custom workflow. Workflows are custom automated processes that you can set up in your repository to build, test, package, release, or deploy any code project on GitHub. <br> - <a href="https://help.github.com/en/actions/getting-started-with-github-actions/about-github-actions">https://help.github.com/en/actions/getting-started-with-github-actions/about-github-actions</a></p>
+</blockquote>
+
+<p>No entraremos muy a fondo en las acciones de GitHub en esta publicación. Lo que necesitas saber es que con las GitHub Actions puede ejecutar tareas en paralelo o en secuencia, y estos se desencadenan por eventos de GitHub como empujar tu código a una <em>branch</em>, abrir una <em>pull request</em>, comentar en un <em>issue</em> o una combinación de muchos.</p>
+
+<p>Estos existen en sus repositorios de GitHub en <code class="highlighter-rouge">.github/workflows/</code> generalmente en forma de archivos yaml. La estructura básica es la siguiente.</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Example of simple GitHub Action</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">master</span><span class="pi">]</span>
+ 
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">say-hi</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Echo Hello World</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="s">echo "Hello World!"</span>
+</code></pre></div></div>
+
+<p>Esta acción se activará cada vez que haya un impulso en su rama maestra y ejecutará el trabajo <code class="highlighter-rouge">say-hi</code> que se ejecuta en una máquina virtual (VM) ubuntu disponible. En esa VM ejecutará el código <code class="highlighter-rouge">echo "Hello World!"</code></p>
+
+<p>Puede ver los resultados / registros de sus acciones en la pestaña <strong>Actions</strong> de tu repositorio.</p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*SSxMvEqcCfOyiWB9hidc8A.png" alt=""></p>
+
+<p>Podrías cambiar facilmente <code class="highlighter-rouge">echo "Hello World!"</code> con</p>
+<div class="language-shell highlighter-rouge"><div class="highlight"><pre class="highlight"><code>datasette publish heroku ripa-2018-db.db <span class="se">\\</span>
+  <span class="nt">--name</span> ripa-2018-db <span class="se">\\</span>
+  <span class="nt">-m</span> metadata.json <span class="se">\\</span>
+  <span class="nt">--extra-options</span><span class="o">=</span><span class="s2">"--config default_page_size:50 --config sql_time_limit_ms:30000 --config facet_time_limit_ms:10000"</span>
+</code></pre></div></div>
+<p>o mejor aún puedes guardar tu código en un <em>script</em> de bash llamado <code class="highlighter-rouge">heroku_deploy.sh</code> y ejecutar <code class="highlighter-rouge">sh heroku_deploy.sh</code> como ejecutarías <code class="highlighter-rouge">echo "Hello World!"</code></p>
+
+<p>Afortunadamente, Heroku ya está instalado en nuestro corredor de la GitHub Action (<a href="https://github.com/actions/virtual-environments/blob/master/images/linux/Ubuntu1804-README.md">ubuntu-latest</a>), por lo que todo lo que tenemos que hacer es iniciar sesión, instalar el complemento <code class="highlighter-rouge">heroku-builds</code> y ejecutar nuestro <em>script</em> <code class="highlighter-rouge">heroku_deploy.sh</code>.</p>
+
+<blockquote>
+  <p>💡 Aprendí sobre la necesidad de instalar <code class="highlighter-rouge">heroku-builds</code> después de que las acciones de GitHub fallaran un par de veces. No estoy seguro de que esté documentado en <strong>datasette</strong> o en la documentación de GitHub Actions.</p>
+</blockquote>
+
+<p>Hasta ahora, nuestra GitHub Action se ve así:</p>
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Example of simple GitHub Action</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">master</span><span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">publish-to-heroku</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Publish to Heroku</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="s">heroku container:login &amp;&amp; heroku plugins:install heroku-builds &amp;&amp; sh heroku_deploy.sh</span>
+</code></pre></div></div>
+
+<p>Esto, sin embargo, aún no está listo para funcionar. Para automatizar el inicio de sesión, debe incluir la variable de entorno <code class="highlighter-rouge">HEROKU_API_KEY</code>. Esto es posible mediante el uso de <a href="https://help.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets">GitHub Secrets</a>.</p>
+
+<p>Para crear tu <em>API key</em> necesitas tener instalada la herramienta de heroku para la línea de comando localmente. Ejecuta el comando <code class="highlighter-rouge">heroku authorizations:create</code> y añadela a tu repositorio en <strong>Settings &gt; Secrets</strong>. Llámalo <code class="highlighter-rouge">HEROKU_API_KEY</code>.</p>
+
+<p>Para que su GitHub Action tenga acceso a ella, debe agregar la siguiente línea a su archivo yaml</p>
+
+<div class="language-yaml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="na">name</span><span class="pi">:</span> <span class="s">Example of simple GitHub Action</span>
+
+<span class="na">on</span><span class="pi">:</span>
+  <span class="na">push</span><span class="pi">:</span>
+    <span class="na">branches</span><span class="pi">:</span> <span class="pi">[</span><span class="nv">master</span><span class="pi">]</span>
+
+<span class="na">jobs</span><span class="pi">:</span>
+  <span class="na">publish-to-heroku</span><span class="pi">:</span>
+    <span class="na">runs-on</span><span class="pi">:</span> <span class="s">ubuntu-latest</span>
+    <span class="na">steps</span><span class="pi">:</span>
+    <span class="pi">-</span> <span class="na">name</span><span class="pi">:</span> <span class="s">Publish to Heroku</span>
+      <span class="na">env</span><span class="pi">:</span> <span class="s">$</span>
+      <span class="na">run</span><span class="pi">:</span> <span class="pi">|</span>
+        <span class="s">heroku container:login &amp;&amp; heroku plugins:install heroku-builds &amp;&amp; sh heroku_deploy.sh</span>
+</code></pre></div></div>
+
+<p>¡Listo! Ahora, cada vez que empujes código a tu repositorio en la <em>branch</em> “master”, implementará una nueva versión de tu <strong>datasette</strong>. Esto significa que puede actualizar su <code class="highlighter-rouge">metadata.json</code>, por ejemplo, con una nueva <em>consulta almacenada</em> o agregar una nueva página a tus<code class="highlighter-rouge"> templates/pages</code>.</p>
+
+<p>Para este proyecto, tengo algunos pasos adicionales (pasos de GitHub Action, es decir) que procesan los datos, construyen la base de datos sqlite3 y la despliegan en heroku cada vez que hay un nuevo “commit” en “master”. También incluyo un par de <em>scripts</em> de Python que leen un archivo yaml separado donde tengo todas las <em>consultas almacenadas</em> y las agrego a un <code class="highlighter-rouge">updated_metadata.json</code>. Esto es para mantener las cosas un poco más limpias, cada <em>consulta almacenada</em> tiene un título, html_description y una larga consulta SQL; Es más fácil de mantener como un archivo separado, en mi opinión.</p>
+
+<p>Puedes ver el archivo yaml de mi GitHub Action aquí <a href="https://github.com/chekos/RIPA-2018-datasette/blob/master/.github/workflows/main.yml">https://github.com/chekos/RIPA-2018-datasette/blob/master/.github/workflows/main.yml</a></p>
+
+<h2 id="bonus">
+<a class="anchor" href="#bonus" aria-hidden="true"><span class="octicon octicon-link"></span></a>bonus</h2>
+<p><strong>using github issues to suggest queries</strong></p>
+
+<p>Si visitas <ripa-2018.datasettes.cimarron.io> y ejecutas una consulta, notarás el botón **Submit in GitHub**.</ripa-2018.datasettes.cimarron.io></p>
+
+<p><img src="https://cdn-images-1.medium.com/max/800/1*hKuWnful3BZbVRBuiIUOuQ.gif" alt=""></p>
+
+<p>Esto se hace mediante un ajuste de la plantilla <code class="highlighter-rouge">query.html</code>. <strong>Datasette</strong> usa <code class="highlighter-rouge">jinja2</code> y en realidad está pasando la consulta SQL como un parámetro de consulta de URL, lo que significa que puede acceder a él usando <code class="highlighter-rouge">request.query_string.split('sql =')[- 1]</code></p>
+
+<p>Ya que tienes acceso a la consulta es facil crear un enlace directo a un <em>issue</em> nuevo en tu repo</p>
+
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="sx">% set </span><span class="n">link_to_new_issue</span> <span class="o">=</span> <span class="s2">"&lt;https://GitHub.com/&gt;&lt;YOUR_USERNAME&gt;/&lt;YOUR_REPO&gt;/issues/new?title=Query+suggestion&amp;labels=suggestion&amp;body="</span> <span class="o">+</span> <span class="o">&lt;</span><span class="no">QUERY_FOR_ISSUE</span><span class="o">&gt;</span> <span class="sx">%}
+</span></code></pre></div></div>
+
+<p>Así se ve en <code class="highlighter-rouge">query.html</code></p>
+
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code>...
+    {% set query_for_issue = "%23+title%0A%0A%23+query%0A%60%60%60sql%0A" + request.query_string.split('sql=')[-1] + "%0A%60%60%60" %}
+    {% set link_to_new_issue = "https://GitHub.com/chekos/ripa-2018-datasette/issues/new?title=Query+suggestion<span class="err">&amp;</span>labels=suggestion<span class="err">&amp;</span>body=" + query_for_issue %}
+
+    <span class="nt">&lt;p&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">id=</span><span class="s">"sql-format"</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">hidden</span><span class="nt">&gt;</span>Format SQL<span class="nt">&lt;/button&gt;</span>
+        <span class="nt">&lt;input</span> <span class="na">type=</span><span class="s">"submit"</span> <span class="na">value=</span><span class="s">"Run SQL"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;button</span> <span class="na">type=</span><span class="s">"button"</span> <span class="na">class=</span><span class="s">"btn btn-secondary btn-sm"</span><span class="nt">&gt;&lt;a</span> <span class="na">href=</span><span class="s">"{{ link_to_new_issue }}"</span> <span class="na">target=</span><span class="s">"_blank"</span><span class="nt">&gt;</span>Submit on <span class="nt">&lt;i</span> <span class="na">class=</span><span class="s">"fab fa-github"</span><span class="nt">&gt;&lt;/i&gt;&lt;/a&gt;&lt;/button&gt;</span>
+    <span class="nt">&lt;/p&gt;</span>
+...
+</code></pre></div></div>
+
+<h2 id="cuanto-tiempo-tomó">
+<a class="anchor" href="#cuanto-tiempo-tom%C3%B3" aria-hidden="true"><span class="octicon octicon-link"></span></a>cuanto tiempo tomó</h2>
+
+<p>Todo el proceso tomó alrededor de 20 horas en total, distribuidas en 3 a 4 semanas. La mayor parte estaba planeando y orquestando todo el proceso automatizado usando GitHub Actions. Espero que este tutorial te ayude a ahorrar esas horas extra. Al igual que cualquier otro proyecto de datos, es mejor pasar un tiempo por adelantado pensando y planeando detalladamente cada paso del proceso.</p>
+
+<h2 id="llamado-a-la-acción">
+<a class="anchor" href="#llamado-a-la-acci%C3%B3n" aria-hidden="true"><span class="octicon octicon-link"></span></a>llamado a la acción</h2>
+
+<p>El mundo ha cambiado. La idea de este proyecto se me ocurrió a mediados de abril y no creé el repositorio de GitHub hasta finales de mes. No comencé a escribir este tutorial hasta la segunda mitad de mayo. Todo ha cambiado desde entonces.</p>
+
+<p>Todos los días en las redes sociales vemos videos y leemos historias sobre autoridades que abusan de su poder y ejercen violencia contra personas inocentes. No son todos, pero no debería ser ninguno de ellos.</p>
+
+<p>Creo en los datos como una herramienta para el cambio, para la rendición de cuentas, para la transparencia. El mundo ha cambiado para siempre por la tecnología y los datos. Como tecnólogos, nerds de datos, expertos en políticas o cualquier etiqueta autoascrita que elijan, tu que me lees, tenemos la responsabilidad de que nuestros pares usen nuestras habilidades, nuestras poderosas herramientas, nuestro conocimiento para hacer del mundo un lugar mejor <strong>porque podemos</strong>.</p>
+
+<p>Te pido que pienses en el papel que desempeñas. ¿Harás del mundo un lugar mejor con las herramientas que estás construyendo, por favor?</p>
+
+<p>Te dejo con el siguiente pensamiento de <a href="http://d4bl.org/">Data4BlackLives</a>:</p>
+
+<blockquote>
+  <p><strong>Data for Black Lives</strong> es un movimiento de activistas, organizadores y matemáticos comprometidos con la misión de utilizar la ciencia de datos para crear un cambio concreto y medible en la vida de las personas negras. <strong>Desde el advenimiento de la informática, la big data y los algoritmos han penetrado prácticamente todos los aspectos de nuestra vida social y económica. Estos nuevos sistemas de datos tienen un enorme potencial para empoderar a las comunidades de color. Herramientas como el modelado estadístico, la visualización de datos y el abastecimiento público, en las manos correctas, son instrumentos poderosos para combatir el sesgo, construir movimientos progresivos y promover el compromiso cívico. Pero la historia cuenta una historia diferente, una en la que los datos se utilizan con demasiada frecuencia como un instrumento de opresión, que refuerza la desigualdad y perpetúa la injusticia. Redlining fue una empresa basada en datos que resultó en la exclusión sistemática de las comunidades negras de los servicios financieros clave. Las tendencias más recientes como la vigilancia predictiva, las sentencias basadas en el riesgo y los préstamos abusivos son variaciones preocupantes sobre el mismo tema. Hoy, la discriminación es una empresa de alta tecnología.</strong> <br> - <a href="http://d4bl.org/"><em>d4bl.org</em></a></p>
+</blockquote>
+
+<hr>
+<p>Este artículo fue publicado originalmente en inglés en la publicación Towards Data Science, <a href="https://medium.com/@chekos/making-open-data-more-accessible-with-datasette-480a1de5e919"><em>Making open data more accessible with datasette</em></a></p>
+
+  </div><iframe src="https://chekos.substack.com/embed" width="100%" height="320" style="border:1px solid #EEE; background:white;" frameborder="0" scrolling="no"></iframe>
+<!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="chekos/chekos.dev"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/datasette/datos%20abiertos/2020/06/25/haciendo-datos-abiertos-mas-accesibles-con-datasette/" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>Blog personal de Sergio Sánchez (@chekoswh). Existe como prueba de la facilidad de fast_template para crear blogs con markdown y jupyter notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/chekos" title="chekos"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.instagram.com/chekos.visuals" title="chekos.visuals"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#instagram"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/chekos" title="chekos"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/ChekosWH" title="ChekosWH"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
