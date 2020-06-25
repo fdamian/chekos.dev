@@ -323,11 +323,15 @@ Si visitas <ripa-2018.datasettes.cimarron.io> y ejecutas una consulta, notarás 
 Esto se hace mediante un ajuste de la plantilla `query.html`. **Datasette** usa `jinja2` y en realidad está pasando la consulta SQL como un parámetro de consulta de URL, lo que significa que puede acceder a él usando `request.query_string.split('sql =')[- 1]`
 
 Ya que tienes acceso a la consulta es facil crear un enlace directo a un _issue_ nuevo en tu repo
+
+{% raw %}
 ```ruby
 {% set link_to_new_issue = "<https://GitHub.com/><YOUR_USERNAME>/<YOUR_REPO>/issues/new?title=Query+suggestion&labels=suggestion&body=" + <QUERY_FOR_ISSUE> %}
 ```
+{% endraw %}
 
 Así se ve en `query.html`
+{% raw %}
 ```html
 ...
     {% set query_for_issue = "%23+title%0A%0A%23+query%0A%60%60%60sql%0A" + request.query_string.split('sql=')[-1] + "%0A%60%60%60" %}
@@ -340,7 +344,7 @@ Así se ve en `query.html`
     </p>
 ...
 ```
-
+{% endraw %}
 ## cuanto tiempo tomó
 
 Todo el proceso tomó alrededor de 20 horas en total, distribuidas en 3 a 4 semanas. La mayor parte estaba planeando y orquestando todo el proceso automatizado usando GitHub Actions. Espero que este tutorial te ayude a ahorrar esas horas extra. Al igual que cualquier otro proyecto de datos, es mejor pasar un tiempo por adelantado pensando y planeando detalladamente cada paso del proceso.
